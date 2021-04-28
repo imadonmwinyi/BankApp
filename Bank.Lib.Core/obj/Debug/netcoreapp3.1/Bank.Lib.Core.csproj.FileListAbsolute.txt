@@ -1,0 +1,16 @@
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\obj\Debug\netcoreapp3.1\Bank.Lib.Core.csprojAssemblyReference.cache
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\obj\Debug\netcoreapp3.1\Bank.Lib.Core.AssemblyInfoInputs.cache
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\obj\Debug\netcoreapp3.1\Bank.Lib.Core.AssemblyInfo.cs
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\obj\Debug\netcoreapp3.1\Bank.Lib.Core.csproj.CoreCompileInputs.cache
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\bin\Debug\netcoreapp3.1\Bank.Lib.Core.deps.json
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\bin\Debug\netcoreapp3.1\Bank.Lib.Core.dll
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\bin\Debug\netcoreapp3.1\Bank.Lib.Core.pdb
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\bin\Debug\netcoreapp3.1\Bank.Lib.Commons.dll
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\bin\Debug\netcoreapp3.1\Bank.Lib.Data.dll
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\bin\Debug\netcoreapp3.1\Bank.Lib.Model.dll
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\bin\Debug\netcoreapp3.1\Bank.Lib.Commons.pdb
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\bin\Debug\netcoreapp3.1\Bank.Lib.Data.pdb
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\bin\Debug\netcoreapp3.1\Bank.Lib.Model.pdb
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\obj\Debug\netcoreapp3.1\Bank.Lib.Core.csproj.CopyComplete
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\obj\Debug\netcoreapp3.1\Bank.Lib.Core.dll
+C:\Users\hp\source\repos\Bank\Bank.Lib.Core\obj\Debug\netcoreapp3.1\Bank.Lib.Core.pdb

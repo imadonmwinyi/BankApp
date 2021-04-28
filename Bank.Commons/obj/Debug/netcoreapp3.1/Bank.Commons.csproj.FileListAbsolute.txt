@@ -1,0 +1,9 @@
+C:\Users\hp\source\repos\BankApp\Utility\bin\Debug\netcoreapp3.1\Bank.Commons.deps.json
+C:\Users\hp\source\repos\BankApp\Utility\bin\Debug\netcoreapp3.1\Bank.Commons.dll
+C:\Users\hp\source\repos\BankApp\Utility\bin\Debug\netcoreapp3.1\Bank.Commons.pdb
+C:\Users\hp\source\repos\BankApp\Utility\obj\Debug\netcoreapp3.1\Bank.Commons.AssemblyInfoInputs.cache
+C:\Users\hp\source\repos\BankApp\Utility\obj\Debug\netcoreapp3.1\Bank.Commons.AssemblyInfo.cs
+C:\Users\hp\source\repos\BankApp\Utility\obj\Debug\netcoreapp3.1\Bank.Commons.csproj.CoreCompileInputs.cache
+C:\Users\hp\source\repos\BankApp\Utility\obj\Debug\netcoreapp3.1\Bank.Commons.dll
+C:\Users\hp\source\repos\BankApp\Utility\obj\Debug\netcoreapp3.1\Bank.Commons.pdb
+C:\Users\hp\source\repos\BankApp\Utility\obj\Debug\netcoreapp3.1\Bank.Commons.csprojAssemblyReference.cache
