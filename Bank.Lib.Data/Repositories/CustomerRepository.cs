@@ -3,9 +3,7 @@ using Bank.Lib.Model;
 using System.Collections.Generic;
 using Bank.Lib.Data.FileOperation;
 using Bank.Lib.Data.InterfacesRepo;
-
-
-
+using Bank.Lib.Data.DataBaseSQL;
 
 namespace Bank.Lib.Data.Repositories
 {
@@ -14,8 +12,11 @@ namespace Bank.Lib.Data.Repositories
         private readonly FileOpening _openfile;
         private readonly FileWriter _fileWriter;
         private readonly FileReader _fileReader;
+        private readonly DBCustomerQuery _custQuery; 
+       
         public CustomerRepository()
         {
+            _custQuery = new DBCustomerQuery(new Connection());
             _openfile = new FileOpening();
             _fileWriter = new FileWriter(_openfile);
             _fileReader = new FileReader(_openfile);
@@ -38,13 +39,19 @@ namespace Bank.Lib.Data.Repositories
             if (_fileReader.Search(customer.Email, "Customer.txt"))
                 throw new Exception(" Customer Already Exist");
             _fileWriter.FileWrite(customerDetial, "Customer.txt");//file Implementation
+            // DataBase implementation
+            if(_custQuery.CheckCustomerExist(customer.Email))
+                throw new Exception(" Customer Already Exist");
+            _custQuery.InsertCustomer(customerDetial);
 
         }
 
         public Customer RetrieveOneCustomer(string Email)
         {
             // call filereader here to find one Customer
-            var customer = _fileReader.ReadOne(Email, "Customer.txt");
+            //var customer = _fileReader.ReadOne(Email, "Customer.txt");
+            // call to database to retrieve one customer
+            var customer = _custQuery.RetrieveCustomer(Email);
             Customer newCustomer = new Customer()
             {
                 Email = customer[0],

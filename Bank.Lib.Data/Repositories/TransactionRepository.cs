@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Bank.Lib.Data.InterfacesRepo;
 using Bank.Lib.Model;
+
 
 
 namespace Bank.Repository
@@ -16,66 +18,16 @@ namespace Bank.Repository
         /// <param name="Amount"></param>
         /// <param name="date"></param>
         /// <param name="Note"></param>
-        public static void AddDepositHistory( string Acct, Decimal Amount, DateTime date, string Note)
-        {
-            Transaction transaction = new Transaction()
-            {
-                TransactionType = "Deposit",
-                AcctNumber = Acct,
-                Amount = Amount,
-                TransactDate = date,
-                Note = Note
-            };
-            //DataStore.TansactionDataStore.Add(transaction);
-        }
-        /// <summary>
-        /// Adding Customer Withdrawal History to DataStore
-        /// </summary>
-        /// <param name="AcctHolderEmail"></param>
-        /// <param name="Acct"></param>
-        /// <param name="Amount"></param>
-        /// <param name="date"></param>
-        /// <param name="Note"></param>
-        public static void AddWithdrawalHistory(string Acct, Decimal Amount, DateTime date, string Note)
-        {
-            Transaction transaction = new Transaction()
-            {
-                TransactionType = "Withdrawal",
-                AcctNumber = Acct,
-                Amount = Amount,
-                TransactDate = date,
-                Note = Note
-            };
-            //DataStore.TansactionDataStore.Add(transaction);
-        }
-       /// <summary>
-       /// Adding Transfer History to DataStore
-       /// </summary>
-       /// <param name="AcctHolderEmail"></param>
-       /// <param name="Acct"></param>
-       /// <param name="Amount"></param>
-       /// <param name="date"></param>
-       /// <param name="Note"></param>
-       /// <param name="benefiaryAcct"></param>
-        public static void AddTransferHistory( string Acct, Decimal Amount, DateTime date, string Note, string benefiaryAcct)
-        {
-            Transaction transaction = new Transaction()
-            {
-                TransactionType = "Transfer",
-                AcctNumber = Acct,
-                Amount = Amount,
-                TransactDate = date,
-                Note = Note,
-                BeneficiaryAcct = benefiaryAcct
-
-            };
-            //DataStore.TansactionDataStore.Add(transaction);
-        }
-
-        //public static List<Transaction> Retrieve()
+        //public void AddHistory( Transaction transaction)
         //{
-        //     return DataStore.TansactionDataStore;
-            
+        //    string query = "INSERT INTO transaction Values(@tranType,@acctN,@benAcct,@date,@note,@amt)";
+
+        //    //DataStore.TansactionDataStore.Add(transaction);
+        //}
+        
+        //public List<string[]> RetrieveTransactions(string AcctNumber)
+        //{
+
         //}
 
     }

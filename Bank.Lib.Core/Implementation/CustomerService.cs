@@ -17,9 +17,10 @@ namespace Bank.Lib.Core.Implementation
         public CustomerService(ICustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;
+            
         }
 
-        public Tuple<string, string, string> Login(string email, string password)
+        public Tuple<string, string, string,string> Login(string email, string password)
         {
             
             // first use email to retrieve user info;
@@ -29,7 +30,7 @@ namespace Bank.Lib.Core.Implementation
 
             if (!PasswordHash.CompareHash(customer.PasswordSalt, customer.PasswordHash, password))
                 throw new Exception("Incorrect Password");
-            var LoginCredential = new Tuple<string, string, string>(customer.CustomerID, customer.Email, customer.LastName);
+            var LoginCredential = new Tuple<string, string, string, string>(customer.CustomerID, customer.Email, customer.LastName,customer.FirstName);
            
             return LoginCredential;
         }

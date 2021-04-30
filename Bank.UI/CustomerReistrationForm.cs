@@ -35,7 +35,7 @@ namespace Bank.UI
                 Dictionary<string, string> customerReg = new Dictionary<string, string>()
                 {{"Email",email},{"FirstName",firstName},{"LastName",lastName},{"Password",pwd} };
                 _customer.Register(customerReg);
-                //new CreateAccountForm(_savings, _customer).Show();
+                MessageBox.Show("Registration Successful", "Success Message");
             }
             catch (Exception ex)
             {

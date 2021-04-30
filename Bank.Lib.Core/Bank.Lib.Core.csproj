@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="2.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Bank.Commons\Bank.Lib.Commons.csproj" />
     <ProjectReference Include="..\Bank.Lib.Data\Bank.Lib.Data.csproj" />
     <ProjectReference Include="..\Bank.Lib.Model\Bank.Lib.Model.csproj" />

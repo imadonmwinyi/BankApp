@@ -12,15 +12,16 @@ namespace Bank.UI
     public partial class Dashboard : Form
     {
         //private readonly ICustomerService _customerService;
-        private readonly Tuple<string, string, string> _loggedIn;
+        private readonly Tuple<string, string, string, string> _loggedIn;
         private readonly IAccountService _acct;
         
-        public Dashboard(Tuple<string, string, string> loggedIn,IAccountService acct)
+        public Dashboard(Tuple<string, string, string, string> loggedIn,IAccountService acct)
         {
             _loggedIn = loggedIn;
             _acct = acct;
             InitializeComponent();
             this.welcome.Text = "Welcome " + " " + _loggedIn.Item3;
+            
         }
 
         private void OpenAccountBtn_Click(object sender, EventArgs e)
@@ -73,6 +74,23 @@ namespace Bank.UI
         {
             if (_acct.CustomerAccounts(_loggedIn.Item1) == null)
                 throw new Exception("No Account Record Yet");
+        }
+
+        private void DashBoard_OnLoad(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_acct.CustomerAccounts(_loggedIn.Item1) == null)
+                    throw new Exception("No Account Yet, Open Account");
+                AccountSummary summary = new AccountSummary( _acct, _loggedIn) { TopLevel = false };
+
+                MainPanel.Controls.Add(summary);
+                summary.Show();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Propmt");
+            }
         }
     }
    

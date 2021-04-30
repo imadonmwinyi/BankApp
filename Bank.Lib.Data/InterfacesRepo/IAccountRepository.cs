@@ -15,5 +15,6 @@ namespace Bank.Lib.Data.InterfacesRepo
         void MakeTransfer(string senderNumber, string receiverNumber, decimal amt,string type);
         decimal GetBalance(string acct);
         decimal GetMiniBalance(string AcctType);
+        List<string[]> GetAccounts(string custID);
     }
 }

@@ -23,6 +23,10 @@ namespace Bank.Lib.Core.Implementation
                 throw new Exception("Can't Deposit Zero and Less Amount");
             _accountRepository.MakeDeposit(Acct, Amount);
         }
+        public List<string[]> GetAccounts(string custID)
+        {
+            return _accountRepository.GetAccounts(custID);
+        }
 
         public void OpenAccount(string custID, string AcctType, decimal initialDeposit)
         {
@@ -45,8 +49,7 @@ namespace Bank.Lib.Core.Implementation
 
         public void Transfer(string OwnerAcct, string BenAcct, decimal Amount, string acctType)
         {
-            Withdraw(OwnerAcct, Amount, acctType);
-            Deposit(BenAcct, Amount);
+            _accountRepository.MakeTransfer(OwnerAcct, BenAcct, Amount, acctType);
         }
 
         public void Withdraw(string Account, decimal Amount, string acctType)

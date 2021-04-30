@@ -218,6 +218,7 @@ namespace Bank.UI
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ACMB Bank Dashboard";
+            this.Load += new System.EventHandler(this.DashBoard_OnLoad);
             this.heading.ResumeLayout(false);
             this.heading.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
