@@ -17,13 +17,15 @@ namespace Bank.UI
        
         private readonly ICustomerService _customer;
         private readonly IAccountService _account;
+        private readonly ITransactService _transact;
        
         
 
-        public OpenAcctLogin_Window(ICustomerService customer, IAccountService account)
+        public OpenAcctLogin_Window(ICustomerService customer, IAccountService account, ITransactService transact)
         {
             _customer = customer;
             _account = account;
+            _transact = transact;
             //_auth = auth;
             InitializeComponent();
             ShowCustomerRegForm();
@@ -38,7 +40,7 @@ namespace Bank.UI
         private void LoginButton_Click(object sender, EventArgs e)
         {
             MainPanel.Controls.Clear();
-            Login login = new Login(_customer,_account) { TopLevel = false };
+            Login login = new Login(_customer,_account,_transact) { TopLevel = false };
             this.MainPanel.Controls.Add(login);
             login.Show();
         }

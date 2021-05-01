@@ -132,6 +132,7 @@ namespace Bank.UI
             this.AccountStateBtn.Text = "Account Statement";
             this.AccountStateBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.AccountStateBtn.UseVisualStyleBackColor = false;
+            this.AccountStateBtn.Click += new System.EventHandler(this.AccountStateBtn_Click);
             // 
             // TransferBtn
             // 

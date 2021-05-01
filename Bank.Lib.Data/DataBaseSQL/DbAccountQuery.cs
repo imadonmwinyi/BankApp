@@ -25,7 +25,7 @@ namespace Bank.Lib.Data.DataBaseSQL
                 cmd.Parameters.Add("@customerID", System.Data.SqlDbType.NVarChar, 50).Value = AccountRecord[0];
                 cmd.Parameters.Add("@accountBalance", System.Data.SqlDbType.Decimal, 50).Value = AccountRecord[2];
                 cmd.Parameters.Add("@dateCreated", System.Data.SqlDbType.DateTime).Value = AccountRecord[4];
-                //cmd.Parameters.Add("@passwordHash", System.Data.SqlDbType.Text).Value = CustomerRecord[4];
+                
 
                 // open connection for inserting
                 dbConn.Open();

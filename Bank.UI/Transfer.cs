@@ -12,10 +12,12 @@ namespace Bank.UI
 {
     public partial class Transfer : Form
     {
+        private readonly ITransactService _transact;
         private readonly IAccountService _accountService;
         private readonly string _custID;
-        public Transfer(IAccountService accountService, string custID)
+        public Transfer(IAccountService accountService, string custID, ITransactService transact)
         {
+            _transact = transact;
             _custID = custID;
             _accountService = accountService;
             InitializeComponent();
@@ -37,6 +39,8 @@ namespace Bank.UI
                 var benAacct = BenAcctBox.Text;
                 var arrStr = Seperators.TwoStringByDash(account);
                 _accountService.Transfer(arrStr[1],benAacct, amount,arrStr[0]);
+                List<string> details = new List<string>() { arrStr[1], amount.ToString(), note, "transfer" };
+                _transact.AddTranHistory(details);
                 MessageBox.Show("Transfer Transaction Succcessful", "Success Message");
 
             }

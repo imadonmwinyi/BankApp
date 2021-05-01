@@ -19,10 +19,11 @@ namespace Bank.UI
             GlobalConfig.AddInstance();
             var CustomerService = GlobalConfig.CustomerService;
             var AccountsService = GlobalConfig.AccountService;
+            var TransactService = GlobalConfig.TransService;
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new OpenAcctLogin_Window(CustomerService,AccountsService));
+            Application.Run(new OpenAcctLogin_Window(CustomerService,AccountsService,TransactService));
         }
     }
 }

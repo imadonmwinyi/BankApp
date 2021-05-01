@@ -12,10 +12,12 @@ namespace Bank.UI
 {
     public partial class Withdrawal : Form
     {
+        private readonly ITransactService _transact;
         private readonly IAccountService _accountService;
         private readonly string _custID;
-        public Withdrawal(IAccountService accountService, string custID)
+        public Withdrawal(IAccountService accountService, string custID, ITransactService transact)
         {
+            _transact = transact;
             _custID = custID;
             _accountService = accountService;
             InitializeComponent();
@@ -35,6 +37,8 @@ namespace Bank.UI
                 var account = AccountComBo.SelectedItem.ToString();
                 var arrStr = Seperators.TwoStringByDash(account);
                 _accountService.Withdraw(arrStr[1], amount,arrStr[0]);
+                List<string> details = new List<string>() { arrStr[1], amount.ToString(), note, "withdraw" };
+                _transact.AddTranHistory(details);
                 MessageBox.Show("Withdraw Transaction Succcessful", "Success Message");
 
             }

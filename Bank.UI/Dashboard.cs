@@ -11,14 +11,15 @@ namespace Bank.UI
 {
     public partial class Dashboard : Form
     {
-        //private readonly ICustomerService _customerService;
+        private readonly ITransactService _transact;
         private readonly Tuple<string, string, string, string> _loggedIn;
         private readonly IAccountService _acct;
         
-        public Dashboard(Tuple<string, string, string, string> loggedIn,IAccountService acct)
+        public Dashboard(Tuple<string, string, string, string> loggedIn,IAccountService acct, ITransactService transact)
         {
             _loggedIn = loggedIn;
             _acct = acct;
+            _transact = transact;
             InitializeComponent();
             this.welcome.Text = "Welcome " + " " + _loggedIn.Item3;
             
@@ -40,7 +41,7 @@ namespace Bank.UI
         private void DepositBtn_Click(object sender, EventArgs e)
         {
             MainPanel.Controls.Clear();
-            Deposit deposit = new Deposit(_acct, _loggedIn.Item1) { TopLevel = false };
+            Deposit deposit = new Deposit(_acct, _loggedIn.Item1,_transact) { TopLevel = false };
             this.MainPanel.Controls.Add(deposit);
             deposit.Show();
         }
@@ -48,7 +49,7 @@ namespace Bank.UI
         private void WithdrawalBtn_Click(object sender, EventArgs e)
         {
             MainPanel.Controls.Clear();
-            Withdrawal withdraw = new Withdrawal(_acct, _loggedIn.Item1) { TopLevel = false };
+            Withdrawal withdraw = new Withdrawal(_acct, _loggedIn.Item1,_transact) { TopLevel = false };
             this.MainPanel.Controls.Add(withdraw);
             withdraw.Show();
         }
@@ -60,7 +61,7 @@ namespace Bank.UI
                 CheckAccoutEmpty();
                 MainPanel.Controls.Clear();
                 _acct.CustomerAccounts(_loggedIn.Item1);
-                Transfer transfer = new Transfer(_acct, _loggedIn.Item1) { TopLevel = false };
+                Transfer transfer = new Transfer(_acct, _loggedIn.Item1,_transact) { TopLevel = false };
                 this.MainPanel.Controls.Add(transfer);
                 transfer.Show();
             }
@@ -91,6 +92,14 @@ namespace Bank.UI
             {
                 MessageBox.Show(ex.Message, "Propmt");
             }
+        }
+
+        private void AccountStateBtn_Click(object sender, EventArgs e)
+        {
+            AccountSummary summary = new AccountSummary(_acct, _loggedIn) { TopLevel = false };
+
+            MainPanel.Controls.Add(summary);
+            summary.Show();
         }
     }
    

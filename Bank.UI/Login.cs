@@ -15,10 +15,12 @@ namespace Bank.UI
     {
         private readonly ICustomerService _customer;
         private readonly IAccountService _account;
-        public Login(ICustomerService customer, IAccountService account)
+        private readonly ITransactService _transact;
+        public Login(ICustomerService customer, IAccountService account,ITransactService transact)
         {
             _customer = customer;
             _account = account;
+            _transact = transact;
             InitializeComponent();
         }
 
@@ -34,7 +36,7 @@ namespace Bank.UI
                 var loginCred = _customer.Login(email, pwd);
                 MessageBox.Show(loginCred.Item1 +" "+ loginCred.Item2 + " " + loginCred.Item3, "Login");
                 // initialize the dashboard here.
-                Dashboard dashboard = new Dashboard(loginCred,_account);
+                Dashboard dashboard = new Dashboard(loginCred,_account,_transact);
                 dashboard.Show();
                 // hide the registration and login window
             }
