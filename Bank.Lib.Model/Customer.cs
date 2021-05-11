@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bank.Lib.Model
 {
     public class Customer
     {
-        public string CustomerID { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; set; } = Guid.NewGuid().ToString();
+        [Required]
+        [MaxLength(50)]
         public string FirstName { get; set; }
+        [Required]
+        [MaxLength(200)]
         public string Email { get; set; }
+        [Required]
         public string LastName { get; set; }
         public byte[] PasswordSalt { get; set; }
         public byte[] PasswordHash { get; set; }
-        //public List<string> customerAccts { get; set; }
-        //public string FullName { get; private set; }
-        public Customer()
-        {
-           // customerAccts = new List<string>();
-        }
-
+        public ICollection<Account> Accounts { get; set; }
+               
     }
 
 }

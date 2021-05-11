@@ -1,29 +1,33 @@
-﻿using Bank.Lib.Core.Implementation;
-using Bank.Lib.Core.Interfaces;
-using Bank.Lib.Data.InterfacesRepo;
-using Bank.Lib.Data.Repositories;
-using Bank.Lib.Data.DataBaseSQL;
+﻿using Bank.Lib.Core.Interfaces;
+using Bank.Lib.Data;
 using System;
+using Bank.Lib.Core.Repositories;
 
 namespace Bank.Lib.Core
 {
     public static class GlobalConfig
     {
-        public static ICustomerService CustomerService { get; set; }
-        public static IAccountService AccountService { get; set; }
-        public static ITransactService TransService { get; set; }
+        public static ICustomerRepository CustRepo { get; set; }
+        public static IAccountRepository ActRepo { get; set; }
+        public static ITransactRepository TRepo { get; set; }
+        public static IAccountOperationRepository Savings { get; set; }
+        public static IAccountOperationRepository Current { get; set; }
+        public static IAuthRepository AuthRepo { get; set; }
         public static void AddInstance()
         {
-            ICustomerRepository customerRepository = new CustomerRepository();
-            CustomerService = new CustomerService(customerRepository);
-            
-            
-            IAccountRepository accountRepository = new AccountsRepository();
-            AccountService = new AccountService(accountRepository);
+            BankContext bankContext = new BankContext();
+            CustRepo = new CustomerRepository(bankContext);
 
+            ActRepo = new AccountRepository(bankContext);
 
-            ITransactionRepo transactionRepo = new TransactionRepository(new DbTransaction(new Connection()));
-            TransService = new TransactService(transactionRepo);
+            TRepo = new TransactRepository(bankContext);
+
+            Savings = new SavingsAccountRepository(bankContext);
+
+            Current = new CurrentAccountRepository(bankContext);
+
+            AuthRepo= new AuthRepository(CustRepo);
+
         }
     }
 }

@@ -7,8 +7,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Bank.Lib.Commons;
-
-
+using Bank.Lib.Model;
 
 namespace Bank.UI
 {
@@ -16,12 +15,14 @@ namespace Bank.UI
     {
         private string AcctType { get; set; }
         private readonly string _customerID;
-        private readonly IAccountService _account;
-        public CreateAccountForm(IAccountService account,string CustID)
+        private readonly IAccountOperationRepository _savings;
+        private readonly IAccountOperationRepository _current;
+        public CreateAccountForm(string CustID,IAccountOperationRepository savings, IAccountOperationRepository current)
         {
             InitializeComponent();
-            _account = account;
             _customerID = CustID;
+            _savings = savings;
+            _current = current;
             SavingsRbtn.Checked = false;
             CurrentRBtn.Checked = false;
             //InitialDepositBox.Enabled = false;
@@ -31,10 +32,31 @@ namespace Bank.UI
         {
             try
             {
+                
                 Validation.ValueNotEmpty(AcctType);
                 Validation.ValueNotEmpty(InitialDepositBox.Text);
                 var initDeposit = decimal.Parse(InitialDepositBox.Text);
-                _account.OpenAccount(_customerID, AcctType, initDeposit);
+                
+                if (AcctType == "Savings")
+                {
+                    var savings = new SavingsAccount();
+                    if (initDeposit < SavingsAccount.MinBalance)
+                        throw new InvalidOperationException("Invalid Initial Deposit");
+                    savings.AcctType = "Savings";
+                    savings.CustomerId=_customerID;
+                    savings.AcctBalance = initDeposit;
+                    _savings.OpenAccount(savings);
+                }
+                else
+                {
+                    var current = new CurrentAccount();
+                    if (initDeposit < CurrentAccount.MinBalance)
+                        throw new InvalidOperationException("Invalid Initial Deposit");
+                    current.AcctType = "Savings";
+                    current.CustomerId = _customerID;
+                    current.AcctBalance = initDeposit;
+                    _savings.OpenAccount(current);
+                }
                 MessageBox.Show("Account Successfully Created", "Accout Created");
                 //this.Hide();
             }

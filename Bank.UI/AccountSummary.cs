@@ -11,11 +11,11 @@ namespace Bank.UI
 {
     public partial class AccountSummary : Form
     {
-        private readonly IAccountService _accountService;
+        private readonly IAccountRepository _acct;
         private readonly Tuple<string, string, string, string> _custInfo;
-        public AccountSummary(IAccountService accountService, Tuple<string, string, string, string> custInfo)
+        public AccountSummary(IAccountRepository acct, Tuple<string, string, string, string> custInfo)
         {
-            _accountService = accountService;
+            _acct = acct;
             _custInfo = custInfo;
             InitializeComponent();
         }
@@ -24,7 +24,7 @@ namespace Bank.UI
         {
             nameLabel.Text += ": "+ _custInfo.Item4 + " " + _custInfo.Item3;
             // get the account information from service
-            var accts = _accountService.GetAccounts(_custInfo.Item1);
+            var accts = _acct.GetAccounts(_custInfo.Item1);
             foreach (var item in accts)
             {
                 var acct = new ListViewItem(item);

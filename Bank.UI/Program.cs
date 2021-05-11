@@ -17,13 +17,16 @@ namespace Bank.UI
         static void Main()
         {
             GlobalConfig.AddInstance();
-            var CustomerService = GlobalConfig.CustomerService;
-            var AccountsService = GlobalConfig.AccountService;
-            var TransactService = GlobalConfig.TransService;
+            var CustRepo = GlobalConfig.CustRepo;
+            var ActRepo = GlobalConfig.ActRepo;
+            var TRepo = GlobalConfig.TRepo;
+            var Savings = GlobalConfig.Savings;
+            var Current = GlobalConfig.Current;
+            var Auth = GlobalConfig.AuthRepo;
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new OpenAcctLogin_Window(CustomerService,AccountsService,TransactService));
+            Application.Run(new OpenAcctLogin_Window(CustRepo,ActRepo,TRepo,Savings,Current,Auth));
         }
     }
 }

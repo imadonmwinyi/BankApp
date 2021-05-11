@@ -43,12 +43,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "dependencies": {
-            "Microsoft.Data.SqlClient": {
-              "target": "Package",
-              "version": "[2.1.2, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -111,12 +105,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "dependencies": {
-            "Microsoft.Data.SqlClient": {
-              "target": "Package",
-              "version": "[2.1.2, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",

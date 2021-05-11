@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Text;
+using System.Linq;
 
 namespace Bank.Lib.Commons
 {
@@ -24,6 +23,18 @@ namespace Bank.Lib.Commons
             if (String.IsNullOrEmpty(val))
                 throw new Exception(" Input cannot be Empty");
             
+        }
+        public static bool ContainsLetters(string val)
+        {
+            var res = val.Any(v => char.IsLetter(v));
+            return res;
+        }
+
+        public static bool ContainsSymbol(string val)
+        {
+            var res = val.Any(c => char.IsSymbol(c));
+
+            return res;
         }
     }
 }

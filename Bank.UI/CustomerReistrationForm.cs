@@ -7,14 +7,16 @@ using System.Text;
 using System.Windows.Forms;
 using Bank.Lib.Core.Interfaces;
 using Bank.Lib.Commons;
+using Bank.Lib.Model;
+
 
 namespace Bank.UI
 {
     public partial class CustomerReistrationForm : Form
     {
-        private readonly ICustomerService _customer;
+        private readonly ICustomerRepository _customer;
         //private IAccountRepository _savings;
-        public CustomerReistrationForm(ICustomerService customer)
+        public CustomerReistrationForm(ICustomerRepository customer)
         {
             _customer = customer;
            // _savings = savings;
@@ -31,10 +33,12 @@ namespace Bank.UI
                 Validation.EmailValidation(EmailBox.Text);
                 var email = EmailBox.Text;
                 var pwd = Password(PasswordBox.Text, ConPasswordBox.Text);
+                var pwdHashSalt = PasswordHash.GenerateHash(pwd);
+                var PasswordH = pwdHashSalt[0];
+                var PasswordS = pwdHashSalt[1];
                 // Create a dictionary of customer to pass to CreateCustomer
-                Dictionary<string, string> customerReg = new Dictionary<string, string>()
-                {{"Email",email},{"FirstName",firstName},{"LastName",lastName},{"Password",pwd} };
-                _customer.Register(customerReg);
+                var customerReg = new Customer() { FirstName = firstName, LastName = lastName, Email = email, PasswordHash = PasswordH, PasswordSalt = PasswordS };
+                _customer.Add(customerReg);
                 MessageBox.Show("Registration Successful", "Success Message");
             }
             catch (Exception ex)

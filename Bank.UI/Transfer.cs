@@ -12,14 +12,18 @@ namespace Bank.UI
 {
     public partial class Transfer : Form
     {
-        private readonly ITransactService _transact;
-        private readonly IAccountService _accountService;
+        private readonly ITransactRepository _transact;
+        private readonly IAccountRepository _acct;
         private readonly string _custID;
-        public Transfer(IAccountService accountService, string custID, ITransactService transact)
+        private readonly IAccountOperationRepository _savings;
+        private readonly IAccountOperationRepository _current;
+        public Transfer(IAccountRepository acct, string custID, ITransactRepository transact, IAccountOperationRepository savings, IAccountOperationRepository current)
         {
             _transact = transact;
             _custID = custID;
-            _accountService = accountService;
+            _acct = acct;
+            _savings = savings;
+            _current = current;
             InitializeComponent();
         }
 
@@ -38,7 +42,11 @@ namespace Bank.UI
                 var account = AccountComBo.SelectedItem.ToString();
                 var benAacct = BenAcctBox.Text;
                 var arrStr = Seperators.TwoStringByDash(account);
-                _accountService.Transfer(arrStr[1],benAacct, amount,arrStr[0]);
+                if(arrStr[0] =="Savings")
+                    _savings.Transfer(arrStr[1], benAacct, amount);
+                else
+                    _current.Transfer(arrStr[1], benAacct, amount);
+
                 List<string> details = new List<string>() { arrStr[1], amount.ToString(), note, "transfer" };
                 _transact.AddTranHistory(details);
                 MessageBox.Show("Transfer Transaction Succcessful", "Success Message");
@@ -52,7 +60,7 @@ namespace Bank.UI
 
         private void Transfer_Load(object sender, EventArgs e)
         {
-            var list = _accountService.CustomerAccounts(_custID);
+            var list = _acct.CustomerAccounts(_custID);
             foreach (var item in list)
             {
                 AccountComBo.Items.Add(item);

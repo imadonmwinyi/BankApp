@@ -15,17 +15,23 @@ namespace Bank.UI
     public partial class OpenAcctLogin_Window : Form
     {
        
-        private readonly ICustomerService _customer;
-        private readonly IAccountService _account;
-        private readonly ITransactService _transact;
+        private readonly ICustomerRepository _customer;
+        private readonly IAccountRepository _account;
+        private readonly ITransactRepository _transact;
+        private readonly IAccountOperationRepository _savings;
+        private readonly IAccountOperationRepository _current;
+        private readonly IAuthRepository _auth;
        
         
 
-        public OpenAcctLogin_Window(ICustomerService customer, IAccountService account, ITransactService transact)
+        public OpenAcctLogin_Window(ICustomerRepository customer, IAccountRepository account, ITransactRepository transact, IAccountOperationRepository savings, IAccountOperationRepository current, IAuthRepository auth)
         {
             _customer = customer;
             _account = account;
             _transact = transact;
+            _savings = savings;
+            _current = current;
+            _auth = auth;
             //_auth = auth;
             InitializeComponent();
             ShowCustomerRegForm();
@@ -40,7 +46,7 @@ namespace Bank.UI
         private void LoginButton_Click(object sender, EventArgs e)
         {
             MainPanel.Controls.Clear();
-            Login login = new Login(_customer,_account,_transact) { TopLevel = false };
+            Login login = new Login(_auth,_account,_transact,_savings,_current) { TopLevel = false };
             this.MainPanel.Controls.Add(login);
             login.Show();
         }

@@ -12,14 +12,18 @@ namespace Bank.UI
 {
     public partial class Withdrawal : Form
     {
-        private readonly ITransactService _transact;
-        private readonly IAccountService _accountService;
+        private readonly ITransactRepository _transact;
+        private readonly IAccountRepository _acct;
         private readonly string _custID;
-        public Withdrawal(IAccountService accountService, string custID, ITransactService transact)
+        private readonly IAccountOperationRepository _savings;
+        private readonly IAccountOperationRepository _current;
+        public Withdrawal(IAccountRepository acct, string custID, ITransactRepository transact, IAccountOperationRepository savings, IAccountOperationRepository current)
         {
             _transact = transact;
             _custID = custID;
-            _accountService = accountService;
+            _acct = acct;
+            _savings = savings;
+            _current = current;
             InitializeComponent();
         }
 
@@ -36,7 +40,10 @@ namespace Bank.UI
                 var note = NoteBox.Text;
                 var account = AccountComBo.SelectedItem.ToString();
                 var arrStr = Seperators.TwoStringByDash(account);
-                _accountService.Withdraw(arrStr[1], amount,arrStr[0]);
+                if (arrStr[0] == "Savings")
+                    _savings.Withdraw(arrStr[1], amount);
+                else
+                    _current.Withdraw(arrStr[1], amount);
                 List<string> details = new List<string>() { arrStr[1], amount.ToString(), note, "withdraw" };
                 _transact.AddTranHistory(details);
                 MessageBox.Show("Withdraw Transaction Succcessful", "Success Message");
@@ -50,7 +57,7 @@ namespace Bank.UI
 
         private void Withdrawal_load(object sender, EventArgs e)
         {
-            var list = _accountService.CustomerAccounts(_custID);
+            var list = _acct.CustomerAccounts(_custID);
             foreach (var item in list)
             {
                 AccountComBo.Items.Add(item);

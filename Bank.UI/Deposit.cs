@@ -12,14 +12,15 @@ namespace Bank.UI
 {
     public partial class Deposit : Form
     {
-        private readonly ITransactService _transact;
-        private readonly IAccountService _accountService;
+        private readonly ITransactRepository _transact;
+        private readonly IAccountRepository _acct;
         private readonly string _custID;
-        public Deposit(IAccountService accountService,string custID, ITransactService transact)
+        
+        public Deposit(IAccountRepository acct,string custID, ITransactRepository transact)
         {
             _transact = transact;
             _custID = custID;
-            _accountService = accountService;
+            _acct = acct;
             InitializeComponent();
         }
 
@@ -35,8 +36,8 @@ namespace Bank.UI
                 var amount = decimal.Parse(AmountBox.Text);
                 var note = NoteBox.Text;
                 var account = AccountComBo.SelectedItem.ToString();
-                var arrStr = Seperators.TwoStringByDash(account);
-                _accountService.Deposit(arrStr[1], amount);
+                var arrStr = Seperators.TwoStringByDash(account);                                   
+                _acct.Deposit(arrStr[1], amount);
                 List<string> details = new List<string>() { arrStr[1], amount.ToString(), note, "deposit" };
                 _transact.AddTranHistory(details);
                 MessageBox.Show("Deposit Transaction Succcessful", "Success Message");
@@ -52,7 +53,7 @@ namespace Bank.UI
         {
             try
             {
-                var list = _accountService.CustomerAccounts(_custID);
+                var list = _acct.CustomerAccounts(_custID);
                 foreach (var item in list)
                 {
                     AccountComBo.Items.Add(item);
