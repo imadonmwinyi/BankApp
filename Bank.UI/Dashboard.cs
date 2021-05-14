@@ -44,6 +44,7 @@ namespace Bank.UI
         private void LogoutBtn_Click(object sender, EventArgs e)
         {
             _auth.Logout();
+            this.Close();
         }
 
         private void DepositBtn_Click(object sender, EventArgs e)
@@ -104,10 +105,30 @@ namespace Bank.UI
 
         private void AccountStateBtn_Click(object sender, EventArgs e)
         {
-            AccountSummary summary = new AccountSummary(_acct, _loggedIn) { TopLevel = false };
+            MainPanel.Controls.Clear();
+            AccountStatement summary = new AccountStatement(_acct, _loggedIn.Item1, _transact) { TopLevel = false };
 
             MainPanel.Controls.Add(summary);
             summary.Show();
+        }
+
+        private void AcctInfBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MainPanel.Controls.Clear();
+                if (_acct.CustomerAccounts(_loggedIn.Item1) == null)
+                    throw new Exception("No Account Yet, Open Account");
+                AccountSummary summary = new AccountSummary(_acct, _loggedIn) { TopLevel = false };
+
+                MainPanel.Controls.Add(summary);
+                summary.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Propmt");
+            }
+
         }
     }
    

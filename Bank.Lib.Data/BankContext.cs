@@ -5,17 +5,12 @@ namespace Bank.Lib.Data
 {
     public class BankContext:DbContext
     {
-        public BankContext()
+        public BankContext(DbContextOptions<BankContext> options):base(options)
         {
-            this.Database.EnsureCreated();
+            
         }
 
       
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //optionsBuilder.UseSqlite(@"Data Source=C:\Users\hp\source\repos\Bank\Bank.Lib.Data\BankDB.db;");
-            optionsBuilder.UseSqlite("Filename=./BankDB.db;");
-        }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<CurrentAccount> CurrentAccount { get; set; }

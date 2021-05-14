@@ -43,6 +43,7 @@ namespace Bank.UI
             this.OpenAccountBtn = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.AcctInfBtn = new System.Windows.Forms.Button();
             this.heading.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -94,6 +95,7 @@ namespace Bank.UI
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.AcctInfBtn);
             this.panel1.Controls.Add(this.LogoutBtn);
             this.panel1.Controls.Add(this.AccountStateBtn);
             this.panel1.Controls.Add(this.TransferBtn);
@@ -111,7 +113,7 @@ namespace Bank.UI
             this.LogoutBtn.BackColor = System.Drawing.SystemColors.HighlightText;
             this.LogoutBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LogoutBtn.ForeColor = System.Drawing.Color.MediumBlue;
-            this.LogoutBtn.Location = new System.Drawing.Point(0, 419);
+            this.LogoutBtn.Location = new System.Drawing.Point(0, 418);
             this.LogoutBtn.Name = "LogoutBtn";
             this.LogoutBtn.Size = new System.Drawing.Size(245, 75);
             this.LogoutBtn.TabIndex = 1;
@@ -208,6 +210,20 @@ namespace Bank.UI
             this.MainPanel.Size = new System.Drawing.Size(855, 590);
             this.MainPanel.TabIndex = 2;
             // 
+            // AcctInfBtn
+            // 
+            this.AcctInfBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.AcctInfBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.AcctInfBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.AcctInfBtn.Location = new System.Drawing.Point(0, 4);
+            this.AcctInfBtn.Name = "AcctInfBtn";
+            this.AcctInfBtn.Size = new System.Drawing.Size(245, 75);
+            this.AcctInfBtn.TabIndex = 2;
+            this.AcctInfBtn.Text = "View Account Info";
+            this.AcctInfBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.AcctInfBtn.UseVisualStyleBackColor = false;
+            this.AcctInfBtn.Click += new System.EventHandler(this.AcctInfBtn_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -244,5 +260,6 @@ namespace Bank.UI
         private System.Windows.Forms.Button OpenAccountBtn;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel MainPanel;
+        private System.Windows.Forms.Button AcctInfBtn;
     }
 }

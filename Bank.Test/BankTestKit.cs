@@ -1,8 +1,6 @@
 using Bank.Lib.Commons;
 using Bank.Lib.Core.Repositories;
-using Bank.Lib.Data;
 using Bank.Lib.Model;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -19,8 +17,8 @@ namespace Bank.Test
         private readonly TransactRepository _trans;
         public CustomerTest()
         {
-            //var _ctx = new DbContextOptionsBuilder().UseInMemoryDatabase("BankTestDb");
-            var _ctx = new BankContext();
+            var BankTest = new BankSeedDataFixture();
+            var _ctx = BankTest.TestBankContext;
             _customer = new CustomerRepository(_ctx);
             _auth = new AuthRepository(_customer);
             _savings = new SavingsAccountRepository(_ctx);
@@ -39,17 +37,18 @@ namespace Bank.Test
             var PasswordS = pwdHashSalt[1];
             var customer = new Customer()
             {
-                Id = "8958f787-1123-4294-8b2c-afcd530a97b4",
-                Email = "promise@gmail.com",
-                FirstName = "promise",
+                Id = "8957f797-1123-4294-8b2c-afcd530a92b4",
+                Email = "shalom@gmail.com",
+                FirstName = "shalom",
                 LastName = "Imadonmwinyi",
                 PasswordHash = PasswordH,
                 PasswordSalt = PasswordS
             };
+            var expected = true;
 
             //Act 
             var actual = _customer.Add(customer);
-            var expected = true;
+            
 
             //Assert
             Assert.Equal(expected, actual);
@@ -156,11 +155,11 @@ namespace Bank.Test
         public void ValidSavingsAccountOpeningTest()
         {
             //Arrange
-            var cust_id = "8958f787-1123-4294-8b2a-cfcd530a97b4";
+            var cust_id = "8957f797-1123-4294-8b2c-afcd530a92b4"; 
             decimal InitialDeposit = 2000.00m;
             var acct = new SavingsAccount()
             {
-                AcctNumber = "7486669202",
+                AcctNumber = "7483469202",
                 AcctBalance = InitialDeposit,
                 AcctType = "Savings",
                 CustomerId = cust_id,
@@ -201,11 +200,11 @@ namespace Bank.Test
         public void ValidCurrentAccountOpeningTest()
         {
             //Arrange
-            var cust_id = "8958f787-1123-4294-8b2a-cfcd530a97b4";
+            var cust_id = "8957f797-1123-4294-8b2c-afcd530a92b4";
             decimal InitialDeposit = 1000.00m;
-            var acct = new SavingsAccount()
+            var acct = new CurrentAccount()
             {
-                AcctNumber = "7437514147",
+                AcctNumber = "7537519107",
                 AcctBalance = InitialDeposit,
                 AcctType = "Current",
                 CustomerId = cust_id,
@@ -233,10 +232,11 @@ namespace Bank.Test
                 CustomerId = cust_id,
                 DateCreated = DateTime.Now
             };
+            var expected = false;
 
             //Act
             var actual = _current.OpenAccount(acct);
-            var expected = true;
+            
 
             //Assert
             Assert.Equal(expected, actual);
@@ -247,12 +247,14 @@ namespace Bank.Test
             //Arrange
             var acctNumber = "7437514147";
             decimal amt = 3000.00m;
+            var expected = true;
 
             //Act
             var actual = _acct.Deposit(acctNumber, amt);
-            var expected = true;
+            
 
             //Assert
+            
             Assert.Equal(expected, actual);
         }
         [Fact]
@@ -290,7 +292,7 @@ namespace Bank.Test
         public void InValidSavingsWidthrawTest()
         {
             //Arrange
-            var InValidWithdrawAmount = 2000.00m; //value greater than balance - MinBalance
+            var InValidWithdrawAmount = 7000.00m; //value greater than balance - MinBalance
             var acctNumber = "7486669202";
 
             //Act
@@ -350,7 +352,7 @@ namespace Bank.Test
         public void InValidSavingsToCurrentTransferTest()
         {
             //Arrange
-            var TransferAmount = 1500.00m;// amount greater than the balance-minimum balance
+            var TransferAmount = 7000.00m;// amount greater than the balance-minimum balance
             var acctSav = "7486669202";
             var acctCurr = "7437514147";
 
