@@ -19,7 +19,7 @@ namespace Bank.Lib.Core.Repositories
         {
             if (Amount < 0)
                 throw new ArgumentOutOfRangeException(nameof(Amount), "Deposit amount must be positive");
-            var res = _bankContext.Accounts.Single(acct => acct.AcctNumber.Equals(Acct));
+            var res = _bankContext.Accounts.FirstOrDefault(acct => acct.AcctNumber.Equals(Acct));
             res.AcctBalance += Amount;
             var row = _bankContext.SaveChanges();
             if (row < 1)
